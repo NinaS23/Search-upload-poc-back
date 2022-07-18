@@ -26,11 +26,11 @@ const upload = multer({ dest: 'uploads/' })
 
 
   server.post("/upload", upload.single("file"), async (req, res) => {
-    const { filename, tamanho } = req.file;
+    const { filename , size } = req.file;
     console.log(req.file)
     const salvarArquivo = {
       filename,
-      tamanho,
+      size,
       url: `http://localhost:5001/files/${filename}`,
       createAt: Date.now,
     };
@@ -39,14 +39,13 @@ const upload = multer({ dest: 'uploads/' })
   
     res.send({
       upload: true,
-      files: req.files,
     });
   });
 
 
 
 
-const PORT = 5001 || 5005
+const PORT = 5004 || 5005
 server.listen(PORT , () =>{
     console.log(chalk.yellow(`entrei na ${PORT}`))
 })
