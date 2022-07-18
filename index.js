@@ -11,6 +11,19 @@ server.use(cors())
 
 
 const upload = multer({ dest: 'uploads/' })
+/* const upload = multer({
+  dest: "./upload/",
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "./upload");
+    },
+    filename: (req, file, cb) => {
+      const fileName = file.originalname;
+      cb(null, fileName);
+    },
+  }),
+}); */
+
 
   server.post("/upload", upload.single("file"), async (req, res) => {
     const { filename, tamanho } = req.file;
